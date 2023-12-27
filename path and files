@@ -1,0 +1,30 @@
+import os
+import glob
+
+path = r"C:\Users\manga\Desktop\guru"
+
+# List files and directories in the specified path
+l = os.listdir(path)
+print(l)
+
+# Print the full path of each file in the directory
+for root,dirs,files in os.walk(path):
+    for f in files:
+        print(os.path.join(root,f))
+
+# List all .py files in the directory and print their paths
+g = glob.glob(os.path.join(path, '*.*'))
+for f in g:
+    print(os.path.join(root, f))
+
+# Save the output to a .dat file
+dat_file_path = os.path.join(path, 'output.dat')
+with open(dat_file_path, 'w') as dat_file:
+    dat_file.write('List of files and directories:\n')
+    dat_file.write('\n'.join(l) + '\n\n')
+    dat_file.write('Full paths of files:\n')
+    dat_file.write('\n'.join(os.path.join(root,f) for f in l) + '\n\n')
+    dat_file.write('List of .py files:\n')
+    dat_file.write('\n'.join(g) + '\n')
+
+print(f"Output saved to {dat_file_path}")
